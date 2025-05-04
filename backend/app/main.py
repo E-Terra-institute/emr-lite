@@ -1,12 +1,10 @@
 from fastapi import FastAPI
-from app.api import patients
-from app.db import create_db
+from app.api.routes import patient
+from app.db.session import engine
+from app.db.base import Base
 
-app = FastAPI(title="EMR-lite API")
+app = FastAPI(title="EMR-lite")
 
-app.include_router(patients.router, prefix="/patients")
+Base.metadata.create_all(bind=engine)
 
-@app.on_event("startup")
-def startup():
-    create_db()
-
+app.include_router(patient.router, prefix="/patients", tags=["Patients"])
