@@ -11,4 +11,3 @@ def create(db: Session, patient: PatientCreate):
     db.commit()
     db.refresh(db_patient)
     return db_patient
-
