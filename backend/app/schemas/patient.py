@@ -15,4 +15,3 @@ class PatientOut(PatientBase):
 
     class Config:
         orm_mode = True
-
